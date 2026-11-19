@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --color-ivory: #f5f2ec;
+  --color-obsidian: #151515;
+  --color-charcoal: #383838;
+  --color-stone: #a6a39e;
+  --color-stone-dark: #524e48;
+  --color-white: #ffffff;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: #f5f2ec;
+    color: #151515;
+    font-family: var(--font-sans);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    overflow-x: hidden;
+    margin: 0;
+  }
+
+  /* Accessible pointer affordance across all enabled native interactive controls */
+  a[href],
+  button:not(:disabled),
+  summary,
+  select:not(:disabled),
+  label[for],
+  input[type="checkbox"]:not(:disabled),
+  input[type="radio"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  button:disabled,
+  select:disabled,
+  input:disabled {
+    cursor: not-allowed;
+  }
+
+  /* Crisp editorial focus-visible indicator on both light and dark surfaces */
+  :focus-visible {
+    outline: 1.5px solid currentColor;
+    outline-offset: 4px;
+  }
+}
+
+/* Clip-path reveal utility initial state handled safely via JS when GSAP runs */
+.editorial-image-wrap {
+  overflow: hidden;
+}
