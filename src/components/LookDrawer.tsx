@@ -87,21 +87,21 @@ export function LookDrawer({
         aria-modal="true"
         aria-labelledby="look-drawer-title"
         onKeyDown={(e) => trapFocusInContainer(e, dialogRef.current)}
-        className="flex h-full w-full max-w-4xl flex-col overflow-y-auto bg-[#F5F2EC] text-[#151515] md:grid md:grid-cols-12"
+        className="flex h-full w-full max-w-4xl flex-col overflow-y-auto bg-[#F5F2EC] text-[#151515] md:grid md:grid-cols-12 md:overflow-hidden"
       >
         {/* Left photographic column */}
-        <div className="relative bg-[#151515] md:col-span-6 md:h-full">
+        <div className="relative shrink-0 bg-[#151515] md:col-span-6 md:h-full">
           <img
             src={look.image}
             alt={look.alt}
             width={look.width}
             height={look.height}
-            className="h-[52vh] w-full object-cover object-top md:h-full"
+            className="h-[46svh] max-h-[420px] w-full object-cover object-top md:h-full md:max-h-none"
           />
         </div>
 
         {/* Right dossier details */}
-        <div className="flex flex-col justify-between p-6 md:col-span-6 md:overflow-y-auto md:p-8 lg:p-10">
+        <div className="flex flex-col justify-between p-6 md:col-span-6 md:h-full md:overflow-y-auto md:p-8 lg:p-10">
           <div>
             <div className="flex items-center justify-between border-b border-[#151515]/15 pb-4">
               <span className="text-[11px] font-medium tracking-[0.24em] text-[#524E48] uppercase">

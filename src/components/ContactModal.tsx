@@ -35,9 +35,11 @@ export function ContactModal({ isOpen, initialLook, onClose }: ContactModalProps
     setErrors({});
     setName('');
     setEmail('');
+    setSalon(ATELIER_SALONS[0].id);
+    setSelectedLook(initialLook);
     setMessage('');
     onClose();
-  }, [onClose]);
+  }, [initialLook, onClose]);
 
   useEffect(() => {
     setSelectedLook(initialLook);
@@ -105,14 +107,14 @@ export function ContactModal({ isOpen, initialLook, onClose }: ContactModalProps
         aria-modal="true"
         aria-labelledby="contact-modal-title"
         onKeyDown={(e) => trapFocusInContainer(e, dialogRef.current)}
-        className="w-full max-w-xl border border-[#151515]/15 bg-[#F5F2EC] p-6 text-[#151515] md:p-12"
+        className="max-h-[92svh] w-full max-w-xl overflow-y-auto overflow-x-hidden border border-[#151515]/15 bg-[#F5F2EC] p-5 text-[#151515] sm:p-7 md:p-8"
       >
-        <div className="flex items-start justify-between border-b border-[#151515]/15 pb-6">
+        <div className="flex items-start justify-between border-b border-[#151515]/15 pb-4">
           <div>
             <p className="text-[11px] font-medium tracking-[0.24em] text-[#524E48] uppercase">
               PRIVATE CLIENTELING
             </p>
-            <h2 id="contact-modal-title" className="mt-2 font-serif text-3xl font-light md:text-4xl">
+            <h2 id="contact-modal-title" className="mt-1.5 font-serif text-2xl font-light sm:text-3xl md:text-4xl">
               ATELIER APPOINTMENT
             </h2>
           </div>
@@ -152,7 +154,7 @@ export function ContactModal({ isOpen, initialLook, onClose }: ContactModalProps
             </button>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} noValidate className="mt-8 space-y-6">
+          <form onSubmit={handleSubmit} noValidate className="mt-5 space-y-4">
             <div>
               <label
                 htmlFor="atelier-name"
@@ -166,11 +168,11 @@ export function ContactModal({ isOpen, initialLook, onClose }: ContactModalProps
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 aria-invalid={Boolean(errors.name)}
-                className="mt-2 w-full border-b border-[#151515]/30 bg-transparent py-2.5 text-sm text-[#151515] focus:border-[#151515]"
+                className="mt-1.5 w-full min-w-0 border-b border-[#151515]/30 bg-transparent py-2 text-sm text-[#151515] focus:border-[#151515]"
                 placeholder="Camille Laurent"
               />
               {errors.name && (
-                <p role="alert" className="mt-1.5 text-xs text-[#991B1B]">
+                <p role="alert" className="mt-1 text-xs text-[#991B1B]">
                   {errors.name}
                 </p>
               )}
@@ -189,18 +191,18 @@ export function ContactModal({ isOpen, initialLook, onClose }: ContactModalProps
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 aria-invalid={Boolean(errors.email)}
-                className="mt-2 w-full border-b border-[#151515]/30 bg-transparent py-2.5 text-sm text-[#151515] focus:border-[#151515]"
+                className="mt-1.5 w-full min-w-0 border-b border-[#151515]/30 bg-transparent py-2 text-sm text-[#151515] focus:border-[#151515]"
                 placeholder="client@domain.com"
               />
               {errors.email && (
-                <p role="alert" className="mt-1.5 text-xs text-[#991B1B]">
+                <p role="alert" className="mt-1 text-xs text-[#991B1B]">
                   {errors.email}
                 </p>
               )}
             </div>
 
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-              <div>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div className="min-w-0">
                 <label
                   htmlFor="atelier-salon"
                   className="block text-[11px] font-medium tracking-[0.22em] text-[#383838] uppercase"
@@ -211,17 +213,17 @@ export function ContactModal({ isOpen, initialLook, onClose }: ContactModalProps
                   id="atelier-salon"
                   value={salon}
                   onChange={(e) => setSalon(e.target.value)}
-                  className="mt-2 w-full border-b border-[#151515]/30 bg-transparent py-2.5 text-sm text-[#151515] focus:border-[#151515]"
+                  className="mt-1.5 w-full min-w-0 truncate border-b border-[#151515]/30 bg-[#F5F2EC] py-2 text-sm text-[#151515] focus:border-[#151515]"
                 >
                   {ATELIER_SALONS.map((item) => (
-                    <option key={item.id} value={item.id}>
+                    <option key={item.id} value={item.id} className="bg-[#F5F2EC] text-[#151515]">
                       {item.label}
                     </option>
                   ))}
                 </select>
               </div>
 
-              <div>
+              <div className="min-w-0">
                 <label
                   htmlFor="atelier-look"
                   className="block text-[11px] font-medium tracking-[0.22em] text-[#383838] uppercase"
@@ -232,13 +234,15 @@ export function ContactModal({ isOpen, initialLook, onClose }: ContactModalProps
                   id="atelier-look"
                   value={selectedLook}
                   onChange={(e) => setSelectedLook(e.target.value)}
-                  className="mt-2 w-full border-b border-[#151515]/30 bg-transparent py-2.5 text-sm text-[#151515] focus:border-[#151515]"
+                  className="mt-1.5 w-full min-w-0 truncate border-b border-[#151515]/30 bg-[#F5F2EC] py-2 text-sm text-[#151515] focus:border-[#151515]"
                 >
-                  <option value="">General Collection Viewing</option>
+                  <option value="" className="bg-[#F5F2EC] text-[#151515]">
+                    General Collection Viewing
+                  </option>
                   {COLLECTION_LOOKS.map((look) => {
                     const label = `${look.number}: ${look.title}`;
                     return (
-                      <option key={look.id} value={label}>
+                      <option key={look.id} value={label} className="bg-[#F5F2EC] text-[#151515]">
                         {label}
                       </option>
                     );

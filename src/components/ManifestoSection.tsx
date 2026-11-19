@@ -141,7 +141,7 @@ export function ManifestoSection() {
 
             <div
               data-manifesto-copy
-              className="mt-4 flex items-center justify-between text-[11px] tracking-[0.2em] text-[#524E48] uppercase"
+              className="mt-4 flex flex-wrap items-center justify-between gap-x-6 gap-y-2 text-[11px] tracking-[0.2em] text-[#524E48] uppercase"
             >
               <span>PLATE 01 · SILHOUETTE STUDY</span>
               <span>ARCHIVE EDITION</span>

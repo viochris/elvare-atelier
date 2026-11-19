@@ -155,7 +155,7 @@ export function CollectionSection({ onSelectLook }: CollectionSectionProps) {
                 </div>
 
                 <div data-look-meta className="mt-5 border-t border-[#A6A39E]/20 pt-4">
-                  <div className="flex items-baseline justify-between gap-4">
+                  <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                     <span className="text-[11px] font-medium tracking-[0.24em] text-[#A6A39E] uppercase">
                       {look.number}
                     </span>

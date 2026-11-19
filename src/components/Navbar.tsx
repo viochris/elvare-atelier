@@ -90,7 +90,7 @@ export function Navbar() {
           aria-modal="true"
           aria-label="Mobile navigation"
           onKeyDown={(e) => trapFocusInContainer(e, drawerRef.current)}
-          className="fixed inset-0 z-50 flex flex-col justify-between bg-[#151515] px-6 py-8 text-[#F5F2EC] md:hidden"
+          className="fixed inset-0 z-50 flex flex-col justify-between gap-8 overflow-y-auto bg-[#151515] px-6 py-8 text-[#F5F2EC] md:hidden"
         >
           <div className="flex items-center justify-between">
             <span className="font-serif text-lg tracking-[0.26em] uppercase">

@@ -72,7 +72,7 @@ export function CampaignSection() {
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-r from-[#151515]/85 via-[#151515]/45 to-transparent"
+          className="absolute inset-0 bg-gradient-to-r from-[#151515]/90 via-[#151515]/68 to-[#151515]/40 md:from-[#151515]/85 md:via-[#151515]/45 md:to-transparent"
         />
         <div
           aria-hidden="true"
