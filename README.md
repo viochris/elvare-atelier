@@ -4,6 +4,7 @@
 
 **An editorial, one-page digital flagship for a fictional Paris and Milan luxury fashion house — crafted with asymmetrical typography, warm-ivory and obsidian pacing, GSAP ScrollTrigger choreography, and an interactive lookbook dossier.**
 
+[![GitHub Repo](https://img.shields.io/badge/GitHub-viochris%2Felvare--atelier-151515?style=for-the-badge&logo=github&logoColor=white)](https://github.com/viochris/elvare-atelier)
 [![React](https://img.shields.io/badge/React_19-151515?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript_5.9-151515?style=for-the-badge&logo=typescript&logoColor=3178C6)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS_v4-151515?style=for-the-badge&logo=tailwind-css&logoColor=38B2AC)](https://tailwindcss.com/)
@@ -260,7 +261,7 @@ elvare-atelier/
 
 ```bash
 # 1. Clone the repository
-git clone <your-repository-url>
+git clone https://github.com/viochris/elvare-atelier.git
 cd elvare-atelier
 
 # 2. Install dependencies
@@ -366,10 +367,14 @@ Because **ÉLVARÉ ATELIER** is a pure static Vite SPA with zero server dependen
 2. Make your changes and verify both `.\node_modules\.bin\tsc --noEmit` and `npm run build` pass with zero errors.
 3. Commit with a concise message and open a pull request describing what changed and how it was tested.
 
+Please open an issue first for larger changes so that the approach can be discussed. Bug reports are welcome at the [issue tracker](https://github.com/viochris/elvare-atelier/issues).
+
 ---
 
 <div align="center">
 
-**ÉLVARÉ ATELIER** · *WEAR YOUR IDENTITY.* · Paris & Milan
+Built by [@viochris](https://github.com/viochris)
+
+**ÉLVARÉ ATELIER** · *WEAR YOUR IDENTITY.* · **[GitHub Repository](https://github.com/viochris/elvare-atelier)** · **[Report an Issue](https://github.com/viochris/elvare-atelier/issues)**
 
 </div>
