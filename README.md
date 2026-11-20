@@ -10,6 +10,7 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS_v4-151515?style=for-the-badge&logo=tailwind-css&logoColor=38B2AC)](https://tailwindcss.com/)
 [![GSAP](https://img.shields.io/badge/GSAP_3.13-151515?style=for-the-badge&logo=greensock&logoColor=88CE02)](https://gsap.com/)
 [![Vite](https://img.shields.io/badge/Vite_7-151515?style=for-the-badge&logo=vite&logoColor=646CFF)](https://vite.dev/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](./LICENSE)
 
 <br />
 
@@ -50,6 +51,7 @@
 13. [Roadmap](#roadmap)
 14. [Troubleshooting](#troubleshooting)
 15. [Contributing](#contributing)
+16. [License](#license)
 
 ---
 
@@ -368,6 +370,12 @@ Because **ÉLVARÉ ATELIER** is a pure static Vite SPA with zero server dependen
 3. Commit with a concise message and open a pull request describing what changed and how it was tested.
 
 Please open an issue first for larger changes so that the approach can be discussed. Bug reports are welcome at the [issue tracker](https://github.com/viochris/elvare-atelier/issues).
+
+---
+
+## License
+
+Released under the [MIT License](./LICENSE).
 
 ---
 
