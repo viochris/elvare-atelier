@@ -14,7 +14,7 @@
 
 <img src="img/01-hero-desktop.png" alt="ÉLVARÉ ATELIER hero section featuring full-bleed architectural limestone photography, editorial serif typography, and minimalist navigation" width="860" />
 
-<sub>Opening editorial viewport (`1440×900`): full-bleed `100svh` limestone gallery framing, high-contrast directional scrim, and staggered `Cormorant Garamond` display typography.</sub>
+<sub>Opening editorial viewport (`2400×1500` Retina HD): full-bleed `100svh` limestone gallery framing, high-contrast directional scrim, and staggered `Cormorant Garamond` display typography.</sub>
 
 <br />
 
@@ -128,21 +128,21 @@ The visual identity balances warm limestone ivory against stark obsidian surface
 
 ## Screenshots
 
-> All screenshots below were captured directly from the running application across desktop (`1440×900`) and mobile (`375×812`) viewports. Files live in [`img/`](./img).
+> All screenshots below were captured directly from the running application in Retina HD across desktop (`2400×1500`) and mobile (`975×2110`) viewports. Files live in [`img/`](./img).
 
 ### Collection Lookbook & Interactive Look Dossier
 
-| Asymmetrical Collection Grid (`1440×900`) | Look Dossier Drawer (`1440×900`) |
+| Asymmetrical Collection Grid (`2400×1500`) | Look Dossier Drawer (`2400×1500`) |
 |:---:|:---:|
 | ![ÉLVARÉ ATELIER asymmetrical lookbook grid showing Look 01 and Look 02](img/02-collection-lookbook.png) | ![Look Dossier Drawer showing Look 01 L'Ombre Trench silhouette, textile, and craft notes](img/03-look-drawer.png) |
 | Staggered 12-column obsidian gallery (`THE NEW PERSPECTIVE — 2026`) with varied `3:4` and `4:5` aspect framing. | Interactive dossier with silhouette architecture, textile composition, `REQUEST PRIVATE FITTING`, and `01 / 04` cycling. |
 
 ### Private Clienteling Modal & Mobile Viewport
 
-| Atelier Appointment Modal (`1440×900`) | Mobile Hero Framing (`375×812`) |
+| Atelier Appointment Modal (`2400×1500`) | Mobile Hero Framing (`975×2110`) |
 |:---:|:---:|
 | ![Atelier Appointment modal preselected with Look 01 L'Ombre Trench](img/04-contact-modal.png) | ![ÉLVARÉ ATELIER mobile hero viewport with hamburger menu and focal-aligned portrait](img/05-mobile-hero.png) |
-| Sharp `0px` Warm Ivory modal with pre-selected silhouette, accessible form validation, and `max-h-[92svh]` containment. | Mobile viewport (`375×812`) using `object-[72%_center]` focal framing and a `44×44px` menu trigger. |
+| Sharp `0px` Warm Ivory modal with pre-selected silhouette, accessible form validation, and `max-h-[92svh]` containment. | Mobile viewport (`390×844` @ 2.5× Retina) using `object-[72%_center]` focal framing and a `44×44px` menu trigger. |
 
 ---
 
