@@ -1,6 +1,9 @@
 import { useRef } from 'react';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -17,6 +20,7 @@ export function HeroSection() {
           const reduceMotion = context.conditions?.['reduceMotion'] ?? false;
           if (reduceMotion) return;
 
+          // Initial entrance timeline on mount
           const tl = gsap.timeline({
             defaults: { ease: 'power3.out', duration: 1.05 },
           });
@@ -54,6 +58,38 @@ export function HeroSection() {
               },
               0.72
             );
+
+          // Scroll-scrubbed depth parallax on a dedicated wrapper separate from the mount scale tween
+          gsap.fromTo(
+            '[data-hero-parallax]',
+            { yPercent: 0 },
+            {
+              yPercent: 10,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: sectionRef.current,
+                start: 'top top',
+                end: 'bottom top',
+                scrub: 0.6,
+              },
+            }
+          );
+
+          gsap.fromTo(
+            '[data-hero-content]',
+            { yPercent: 0, opacity: 1 },
+            {
+              yPercent: -14,
+              opacity: 0.35,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: sectionRef.current,
+                start: 'top top',
+                end: 'bottom top',
+                scrub: 0.6,
+              },
+            }
+          );
         }
       );
     },
@@ -66,17 +102,22 @@ export function HeroSection() {
       ref={sectionRef}
       className="relative flex min-h-[100svh] w-full items-end overflow-hidden bg-[#151515] text-[#FFFFFF]"
     >
-      {/* Hero photograph with fetchPriority="high" and explicit intrinsic dimensions */}
-      <div className="absolute inset-0">
-        <img
-          data-hero-image
-          src="/images/hero-editorial.jpg"
-          alt="Model in an architectural obsidian virgin wool trench coat inside a minimalist limestone gallery."
-          width={1920}
-          height={1080}
-          fetchPriority="high"
-          className="h-full w-full object-cover object-[72%_center] md:object-center will-change-transform"
-        />
+      {/* Hero photograph with 20% vertical bleed for scrubbed scroll parallax */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div
+          data-hero-parallax
+          className="absolute inset-x-0 -top-[14%] h-[120%] w-full will-change-transform"
+        >
+          <img
+            data-hero-image
+            src="/images/hero-editorial.jpg"
+            alt="Model in an architectural obsidian virgin wool trench coat inside a minimalist limestone gallery."
+            width={1920}
+            height={1080}
+            fetchPriority="high"
+            className="h-full w-full object-cover object-[72%_center] md:object-center will-change-transform"
+          />
+        </div>
         {/* Controlled directional contrast scrim ensuring AAA legibility over photography */}
         <div
           aria-hidden="true"
@@ -92,7 +133,10 @@ export function HeroSection() {
         />
       </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-[1440px] px-6 pb-16 pt-32 md:px-12 md:pb-24 lg:px-16">
+      <div
+        data-hero-content
+        className="relative z-10 mx-auto w-full max-w-[1440px] px-6 pb-16 pt-32 will-change-transform md:px-12 md:pb-24 lg:px-16"
+      >
         <div className="max-w-3xl">
           <p
             data-hero-micro

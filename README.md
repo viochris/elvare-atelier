@@ -144,14 +144,14 @@ The aesthetic pairs warm Parisian limestone ivory with severe obsidian wool tail
 
 ### 2. Full-Screen Hero ([`HeroSection.tsx`](./src/components/HeroSection.tsx))
 * `100svh` limestone gallery photograph (`fetchPriority="high"`, eager load) protected by top, bottom, and left directional contrast scrims so navigation links stay crisp over the upper-right sunlit window.
-* Staggered GSAP entrance sequence revealing `A STUDY IN FORM, IDENTITY & EXPRESSION.`, `"THE ART OF BEING DIFFERENT."`, and `"EXPLORE THE COLLECTION."` CTA.
+* Staggered GSAP entrance sequence revealing `A STUDY IN FORM, IDENTITY & EXPRESSION.`, `"THE ART OF BEING DIFFERENT."`, and `"EXPLORE THE COLLECTION."` CTA, paired with scrubbed scroll parallax (`yPercent: 0` -> `10` inside a `120%` vertical bleed wrapper) and subtle headline depth drift.
 
 ### 3. Brand Manifesto ([`ManifestoSection.tsx`](./src/components/ManifestoSection.tsx))
 * Asymmetrical 12-column editorial spread (`#about`) pairing `ATELIER NOTES · PARIS / MILAN · SEASON 2026`, `"BEYOND THE ORDINARY."`, and the brand manifesto quote with a `3:4` sculptural cashmere/silk cape study (`PLATE 01 · SILHOUETTE STUDY`).
-* GSAP `ScrollTrigger` timeline combining vertical `clipPath` curtain reveal (`inset(100% 0% 0% 0%)` -> `0%`) and subtle image scale settle.
+* GSAP `ScrollTrigger` timeline combining vertical `clipPath` curtain reveal (`inset(100% 0% 0% 0%)` -> `0%`), image scale settle, and scrubbed internal portrait parallax (`yPercent: -6` -> `+6`).
 
 ### 4. The Collection & Look Dossier Drawer ([`CollectionSection.tsx`](./src/components/CollectionSection.tsx), [`LookDrawer.tsx`](./src/components/LookDrawer.tsx))
-* Staggered 12-column obsidian gallery (`#collection`, `"THE NEW PERSPECTIVE — 2026"`) showcasing **4 signature silhouettes** with alternating `3:4` and `4:5` proportions:
+* Staggered 12-column obsidian gallery (`#collection`, `"THE NEW PERSPECTIVE — 2026"`) showcasing **4 signature silhouettes** with alternating `3:4` and `4:5` proportions, internal image parallax (`yPercent: -5` -> `+5`), and desktop staggered column depth parallax (`±22px` vs. `±48px`):
 
 | Look | Title | Category | Textile Composition | Atelier Craft Detail |
 |---|---|---|---|---|
@@ -163,10 +163,10 @@ The aesthetic pairs warm Parisian limestone ivory with severe obsidian wool tail
 * Clicking any look opens the **Look Dossier Drawer** with independent desktop dossier scrolling, `PREVIOUS` / `NEXT` cycling (buttons or `ArrowLeft` / `ArrowRight` keys), `Escape` close, and a direct **`REQUEST PRIVATE FITTING`** CTA that pre-fills the silhouette inside `ContactModal`.
 
 ### 5. Campaign Editorial ([`CampaignSection.tsx`](./src/components/CampaignSection.tsx))
-* Dramatic `88svh` twilight colonnade spread (`#campaign`) showcasing `"FORM MEETS FREEDOM."` with GSAP `ScrollTrigger` scrubbed parallax (`yPercent: -7` to `+7` inside a static `-top-[9%]` `h-[118%]` bleed container).
+* Dramatic `88svh` twilight colonnade spread (`#campaign`) showcasing `"FORM MEETS FREEDOM."` with deep GSAP `ScrollTrigger` scrubbed parallax (`yPercent: -10` to `+10` inside a static `-top-[12%]` `h-[124%]` bleed container).
 
 ### 6. House Philosophy, Footer & Private Salon Modal ([`PhilosophySection.tsx`](./src/components/PhilosophySection.tsx), [`Footer.tsx`](./src/components/Footer.tsx), [`ContactModal.tsx`](./src/components/ContactModal.tsx))
-* Architectural ivory spread (`#philosophy`) presenting `"WE DO NOT FOLLOW THE MOMENT. WE DEFINE IT."` alongside a three-quarter back-seam cashmere portrait and `BOOK PRIVATE SALON` trigger.
+* Architectural ivory spread (`#philosophy`) presenting `"WE DO NOT FOLLOW THE MOMENT. WE DEFINE IT."` alongside a three-quarter back-seam cashmere portrait with internal scrubbed parallax (`yPercent: -6` -> `+6`), opposing desktop statement drift (`±24px`), and `BOOK PRIVATE SALON` trigger.
 * Minimalist dark footer with **ÉLVARÉ ATELIER**, `"WEAR YOUR IDENTITY."`, external `INSTAGRAM` link (`rel="noopener noreferrer"`), `CONTACT` modal trigger, and `© 2026 ÉLVARÉ ATELIER`.
 * Accessible **Atelier Appointment** modal featuring client-side validation (`FULL NAME *`, `EMAIL ADDRESS *`), salon location dropdown (`Paris · Rue Saint-Honoré Salon`, `Milan · Via Brera Atelier`, `Private Virtual Consultation`), silhouette selector, loading state (`REGISTERING REQUEST...`), confirmation view (`REQUEST REGISTERED`), and full field/select reset on close.
 
@@ -239,7 +239,7 @@ sequenceDiagram
         Media-->>GSAP: Skip non-essential reveals & parallax
     else Standard Motion
         Media->>GSAP: Run Hero timeline + ScrollTrigger reveals (once: true)
-        Media->>GSAP: Bind Campaign scrubbed yPercent parallax (-7 to +7)
+        Media->>GSAP: Bind multi-section scrubbed parallax (Hero, Manifesto, Collection, Campaign, Philosophy)
     end
     Browser-->>App: document.fonts.ready resolves
     App->>GSAP: ScrollTrigger.refresh() calibrates exact offsets
@@ -392,7 +392,7 @@ Because **ÉLVARÉ ATELIER** is a pure static Vite SPA with zero server dependen
 |---|---|---|
 | 1 | **Landscape Hero & Campaign Framing on Narrow Phones** | `hero-editorial.jpg` and `campaign-spread.jpg` place models on the right third of a `16:9` frame. Applying `object-[72%_center]` and `object-[68%_center]` below `md` keeps the figures centered on `320px`–`390px` portrait screens. |
 | 2 | **Top-Bar Legibility Over Bright Gallery Clerestory** | Added a subtle top-down dark gradient scrim in [`HeroSection.tsx`](./src/components/HeroSection.tsx) so `11px` white nav items stay legible against the upper-right sunlit window. |
-| 3 | **GSAP Parallax Overwriting Static CSS Offset** | Using static `-top-[9%]` on `h-[118%]` in [`CampaignSection.tsx`](./src/components/CampaignSection.tsx) instead of Tailwind `-translate-y-[9%]` ensures GSAP's `yPercent` parallax (`-7` to `+7`) never strips the centering bleed. |
+| 3 | **GSAP Parallax Overwriting Static CSS Offset** | Using static bleed offsets (`-top-[14%] h-[120%]` in Hero, `-top-[12%] h-[124%]` in Campaign, and dedicated inner `[data-*-parallax]` wrappers in Manifesto, Collection, and Philosophy) instead of CSS `translateY` ensures GSAP `yPercent` parallax never strips centering or collides with hover `scale` tweens. |
 | 4 | **Short-Laptop Modal Clipping & 320px Overflow** | Constrained [`ContactModal.tsx`](./src/components/ContactModal.tsx) with `max-h-[92svh] overflow-y-auto overflow-x-hidden`, tightened vertical padding, added `min-w-0 truncate` on selects, and set solid `#F5F2EC` option backgrounds. |
 | 5 | **Stale Salon / Look Selections After Reopening Modal** | Unified `handleResetAndClose` in [`ContactModal.tsx`](./src/components/ContactModal.tsx) to reset `salon`, `selectedLook`, `status`, `errors`, and all text inputs on every close path (`Escape`, backdrop click, X button, or `RETURN TO ATELIER`). |
 | 6 | **Mobile Campaign Text Over Ivory Garments (`320×568`)** | Strengthened the mobile gradient scrim (`from-[#151515]/90 via-[#151515]/68 to-[#151515]/40`) below `md` so `"FORM MEETS FREEDOM."` and body copy maintain strong contrast. |

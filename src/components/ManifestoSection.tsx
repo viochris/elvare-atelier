@@ -70,6 +70,22 @@ export function ManifestoSection() {
               },
               0.38
             );
+
+          // Scrubbed internal portrait parallax inside the clipped 3:4 frame
+          gsap.fromTo(
+            '[data-manifesto-parallax]',
+            { yPercent: -6 },
+            {
+              yPercent: 6,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: '[data-manifesto-frame]',
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: 0.65,
+              },
+            }
+          );
         }
       );
     },
@@ -127,16 +143,21 @@ export function ManifestoSection() {
           <div className="lg:col-span-5 lg:col-start-8">
             <div
               data-manifesto-frame
-              className="editorial-image-wrap aspect-[3/4] w-full bg-[#383838]"
+              className="editorial-image-wrap relative aspect-[3/4] w-full bg-[#383838]"
             >
-              <img
-                data-manifesto-img
-                src="/images/manifesto-atelier.jpg"
-                alt="Sculptural warm-ivory raw silk and cashmere cape in a sunlit Parisian atelier."
-                width={900}
-                height={1200}
-                className="h-full w-full object-cover object-center will-change-transform"
-              />
+              <div
+                data-manifesto-parallax
+                className="absolute inset-x-0 -top-[7%] h-[114%] w-full will-change-transform"
+              >
+                <img
+                  data-manifesto-img
+                  src="/images/manifesto-atelier.jpg"
+                  alt="Sculptural warm-ivory raw silk and cashmere cape in a sunlit Parisian atelier."
+                  width={900}
+                  height={1200}
+                  className="h-full w-full object-cover object-center will-change-transform"
+                />
+              </div>
             </div>
 
             <div

@@ -19,9 +19,11 @@ export function PhilosophySection({ onOpenContact }: PhilosophySectionProps) {
       mm.add(
         {
           reduceMotion: '(prefers-reduced-motion: reduce)',
+          isDesktop: '(min-width: 1024px)',
         },
         (context) => {
           const reduceMotion = context.conditions?.['reduceMotion'] ?? false;
+          const isDesktop = context.conditions?.['isDesktop'] ?? false;
           if (reduceMotion) return;
 
           const tl = gsap.timeline({
@@ -61,6 +63,40 @@ export function PhilosophySection({ onOpenContact }: PhilosophySectionProps) {
               },
               0.22
             );
+
+          // Scrubbed internal portrait parallax inside the 3:4 frame
+          gsap.fromTo(
+            '[data-philosophy-parallax]',
+            { yPercent: -6 },
+            {
+              yPercent: 6,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: '[data-philosophy-frame]',
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: 0.65,
+              },
+            }
+          );
+
+          // Subtle opposing editorial drift on desktop statement column
+          if (isDesktop) {
+            gsap.fromTo(
+              '[data-philosophy-statement]',
+              { y: 24 },
+              {
+                y: -24,
+                ease: 'none',
+                scrollTrigger: {
+                  trigger: sectionRef.current,
+                  start: 'top bottom',
+                  end: 'bottom top',
+                  scrub: 0.75,
+                },
+              }
+            );
+          }
         }
       );
     },
@@ -79,22 +115,30 @@ export function PhilosophySection({ onOpenContact }: PhilosophySectionProps) {
           <div className="lg:col-span-5">
             <div
               data-philosophy-frame
-              className="editorial-image-wrap aspect-[3/4] w-full bg-[#383838]"
+              className="editorial-image-wrap relative aspect-[3/4] w-full bg-[#383838]"
             >
-              <img
-                data-philosophy-img
-                src="/images/philosophy-portrait.jpg"
-                alt="Three-quarter back profile highlighting the sculptural collar and center back seam of an ivory double-faced cashmere coat."
-                width={900}
-                height={1200}
-                loading="lazy"
-                className="h-full w-full object-cover object-center will-change-transform"
-              />
+              <div
+                data-philosophy-parallax
+                className="absolute inset-x-0 -top-[7%] h-[114%] w-full will-change-transform"
+              >
+                <img
+                  data-philosophy-img
+                  src="/images/philosophy-portrait.jpg"
+                  alt="Three-quarter back profile highlighting the sculptural collar and center back seam of an ivory double-faced cashmere coat."
+                  width={900}
+                  height={1200}
+                  loading="lazy"
+                  className="h-full w-full object-cover object-center will-change-transform"
+                />
+              </div>
             </div>
           </div>
 
           {/* Right oversized statement with generous negative space */}
-          <div className="lg:col-span-6 lg:col-start-7">
+          <div
+            data-philosophy-statement
+            className="lg:col-span-6 lg:col-start-7"
+          >
             <p
               data-philosophy-copy
               className="mb-8 text-[11px] font-medium tracking-[0.26em] text-[#524E48] uppercase"

@@ -20,12 +20,12 @@ export function CampaignSection() {
           const reduceMotion = context.conditions?.['reduceMotion'] ?? false;
           if (reduceMotion) return;
 
-          // Parallax strictly on the background image layer, never on typography
+          // Deep scrubbed parallax on the background spread inside a 24% oversized bleed frame
           gsap.fromTo(
             '[data-campaign-parallax]',
-            { yPercent: -7 },
+            { yPercent: -10 },
             {
-              yPercent: 7,
+              yPercent: 10,
               ease: 'none',
               scrollTrigger: {
                 trigger: sectionRef.current,
@@ -68,7 +68,7 @@ export function CampaignSection() {
           width={1920}
           height={1080}
           loading="lazy"
-          className="absolute inset-x-0 -top-[9%] h-[118%] w-full object-cover object-[68%_center] md:object-center will-change-transform"
+          className="absolute inset-x-0 -top-[12%] h-[124%] w-full object-cover object-[68%_center] md:object-center will-change-transform"
         />
         <div
           aria-hidden="true"

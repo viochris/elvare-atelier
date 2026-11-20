@@ -27,9 +27,11 @@ export function CollectionSection({ onSelectLook }: CollectionSectionProps) {
       mm.add(
         {
           reduceMotion: '(prefers-reduced-motion: reduce)',
+          isDesktop: '(min-width: 1024px)',
         },
         (context) => {
           const reduceMotion = context.conditions?.['reduceMotion'] ?? false;
+          const isDesktop = context.conditions?.['isDesktop'] ?? false;
           if (reduceMotion) return;
 
           gsap.from('[data-collection-header]', {
@@ -45,8 +47,9 @@ export function CollectionSection({ onSelectLook }: CollectionSectionProps) {
           });
 
           const items = gsap.utils.toArray<HTMLElement>('[data-look-article]');
-          items.forEach((item) => {
+          items.forEach((item, index) => {
             const frame = item.querySelector('[data-look-frame]');
+            const parallaxLayer = item.querySelector('[data-look-parallax]');
             const meta = item.querySelector('[data-look-meta]');
 
             const tl = gsap.timeline({
@@ -79,6 +82,43 @@ export function CollectionSection({ onSelectLook }: CollectionSectionProps) {
                   ease: 'power2.out',
                 },
                 '-=0.55'
+              );
+            }
+
+            // Internal scrubbed image depth inside each lookbook frame
+            if (parallaxLayer) {
+              gsap.fromTo(
+                parallaxLayer,
+                { yPercent: -5 },
+                {
+                  yPercent: 5,
+                  ease: 'none',
+                  scrollTrigger: {
+                    trigger: item,
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: 0.7,
+                  },
+                }
+              );
+            }
+
+            // Staggered column parallax on desktop so right-column plates float at a distinct cadence
+            if (isDesktop) {
+              const travel = index % 2 === 0 ? 22 : 48;
+              gsap.fromTo(
+                item,
+                { y: travel },
+                {
+                  y: -travel,
+                  ease: 'none',
+                  scrollTrigger: {
+                    trigger: item,
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: 0.75,
+                  },
+                }
               );
             }
           });
@@ -132,14 +172,19 @@ export function CollectionSection({ onSelectLook }: CollectionSectionProps) {
                   data-look-frame
                   className={`editorial-image-wrap relative w-full bg-[#222222] ${look.aspectClass}`}
                 >
-                  <img
-                    src={look.image}
-                    alt={look.alt}
-                    width={look.width}
-                    height={look.height}
-                    loading="lazy"
-                    className="h-full w-full object-cover object-top transition-transform duration-700 ease-out will-change-transform group-hover:scale-[1.03] group-focus-visible:scale-[1.03]"
-                  />
+                  <div
+                    data-look-parallax
+                    className="absolute inset-x-0 -top-[6%] h-[112%] w-full will-change-transform"
+                  >
+                    <img
+                      src={look.image}
+                      alt={look.alt}
+                      width={look.width}
+                      height={look.height}
+                      loading="lazy"
+                      className="h-full w-full object-cover object-top transition-transform duration-700 ease-out will-change-transform group-hover:scale-[1.03] group-focus-visible:scale-[1.03]"
+                    />
+                  </div>
 
                   <div
                     aria-hidden="true"
